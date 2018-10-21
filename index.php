@@ -14,10 +14,11 @@ try {
 	//$db->exec("insert into users (name, score) values ('Mr.B', 55)");
 	//echo "User added.";
 	$stmt = $db->prepare("insert into users (name, score) values (?, ?)");
-	$stmt->execute(['Mr.C', 60]);
-	$stmt = $db->prepare("insert into users (name, score) values (:name, :score)");
-	$stmt->execute([':name'=>'Mr.D', ':score'=>80]);
-	echo "inserted: " . $db->lastInsertId();
+	$name = "Mr.E";
+	$score = 20;
+	$stmt->bindValue(1, $name, PDO::PARAM_STR);
+	$stmt->bindValue(2, $score, PDO::PARAM_INT);
+	$stmt->execute();
 
 	// disconnect
 	$db = null;
